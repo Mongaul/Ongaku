@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "@discord-player/extractor": "^4.4.4",
+    "discord-player": "^6.6.4",
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "ffmpeg-static": "^5.2.0",
+    "mediaplex": "^0.0.8",
+    "youtube-ext": "^1.1.14"
+  },
+  "name": "ongaku-bot-code",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "eslint": "^8.49.0"
+  }
+}
