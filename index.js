@@ -30,7 +30,6 @@ for (const file of commandFiles) {
 }
 
 
-
 client.login(process.env.TOKEN);
 //Bot Boot-up
 client.once(Events.ClientReady, c => {
@@ -46,9 +45,10 @@ client.on(Events.Warning, console.warn);
 //player section
 const player = new Player(client);
 
-//extractor bullshit
+//Extractor = controls sources of music; change for default source of add bridge sources
 (async () => {
-    await player.extractors.loadDefault((ext) => ext !== 'YouTubeExtractor');
+    //await player.extractors.loadDefault((ext) => ext !== 'YouTubeExtractor');
+    await player.extractors.loadDefault((ext) => ext == 'YouTubeExtractor');
     console.log("Fuck you");
 })();
 

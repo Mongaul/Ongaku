@@ -9,7 +9,7 @@ module.exports = {
         .setName("play")
         .setDescription("Play or enqueue song of choice!")
             .addStringOption( option =>
-                option.setName("input")
+                option.setName("song")
                     .setDescription("the name of the song")
                     .setAutocomplete(true)
                     .setRequired(true)),
@@ -28,9 +28,10 @@ module.exports = {
     async run (interaction) {
         //console.log(interaction)
         if (!interaction.isChatInputCommand()) return;
-        await interaction.deferReply({ephemeral: true})
+        //await interaction.deferReply({ephemeral: true})
+        await interaction.deferReply()
 
-        const query = interaction.options.getString("query", true)
+        const query = interaction.options.getString("song", true)
         const player = useMainPlayer();
         try{
             if (!interaction.member.voice.channel) {
@@ -43,7 +44,7 @@ module.exports = {
         const searchResult = await player.search(query, {
             requestedBy: interaction.user,
         });
-        console.log(interaction.user)
+        //console.log(interaction.user)
 
         if(!searchResult.hasTracks()) {
             return interaction.followUp(`We couldn't find tracks for ${query}!`)
@@ -60,27 +61,24 @@ module.exports = {
                         requestedBy: interaction.user,
                     },
                     bufferingTimeout: 15000,
-                    leaveOnStop: true,
-                    leaveOnStopCooldown: 5000,
-                    leaveOnEnd: true,
-                    leaveOnEndCooldown: 15000,
-                    leaveOnEmpty: true,
-                    leaveOnEmptyCooldown: 300000,
+                    leaveOnStop: false,
+                    leaveOnEnd: false,
+                    leaveOnEmpty: false,
                     skipOnNoStream: true,
                 },
             }
         );
 
         const message = resume.track.playlist
-            ? `👍🏼| All **track(s)** from **${resume.track.playlist.title}** enqueued!`
-            : `👍🏼| **${resume.track.author} - ${resume.track.title}** enqueued!`
+            ? `👍🏼| All **track(s)** of **${resume.track.playlist.title}** from ${resume.track.url} **enqueued!`
+            : `👍🏼| **${resume.track.author} - ${resume.track.title}** from ${resume.track.url} **enqueued!`
         return interaction.editReply({ content: message });
         
         } catch (error) {
             console.error(error);
             return interaction.followUp({
                 content: "An error occurred while trying to play the track",
-                ephemeral: true,
+                //ephemeral: true,
             });
         }
     },
