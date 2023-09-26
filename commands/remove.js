@@ -23,7 +23,7 @@ module.exports = {
          });
         }
         queue.node.remove(queue.currentTrack)
-        queue.node.skip();
+        //queue.node.skip();
         const newQueue = useQueue(interaction.guildId);
         //fix content:
         return interaction.reply({

@@ -17,7 +17,7 @@ module.exports = {
         //await interaction.deferReply({ephemeral: true})
         await interaction.deferReply()
 
-        const query = interaction.options.parseInt("index", true)
+        const query = interaction.options.getInteger("index", true)
         const index = query-1
         const queue = useQueue(interaction.guildId);
         if(!queue){

@@ -23,7 +23,7 @@ module.exports = {
             });
         }
         timeLine.paused ? timeLine.resume() : timeLine.pause();
-        const state = timeline.paused;
+        const state = timeLine.paused;
         return interaction.reply({
             content: `Ongaku has been **${state ? "paused" : "resumed"}**`
         })

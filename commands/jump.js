@@ -9,15 +9,16 @@ module.exports = {
             .addIntegerOption( option =>
                 option.setName("index")
                     .setDescription("Song's index in the queue")
+                    .setMinValue(1)
                     .setRequired(true)),
     
     async run (interaction) {
         //console.log(interaction)
         if (!interaction.isChatInputCommand()) return;
         //await interaction.deferReply({ephemeral: true})
-        await interaction.deferReply()
+        //await interaction.deferReply()
 
-        const query = interaction.options.parseInt("index", true)
+        const query = interaction.options.getInteger("index", true)
         const index = query-1
         const queue = useQueue(interaction.guildId);
         if(!queue){
@@ -26,18 +27,25 @@ module.exports = {
                 ephemeral: true,
             })
         }
-        if(!queue.queue.tracks.at(index)) {
+        if(!queue.tracks.at(index)) {
             return interaction.reply({
                content:"There is no song at that queue index",
                ephemeral: true
             });
            }
+        if(query<1){
+            return interaction.reply({
+                content: "Invalid index: index must be 1 or greater assuming queue has something.",
+                ephemeral: true,
+            })
+        } 
 
-        queue.node.skipTo(index);
+        const message = `skipped to ${query}\n; now playing:**${queue.tracks.at(index).author} - ${queue.tracks.at(index).title}** from ${queue.tracks.at(index).url} **`
+        queue.node.jump(index);
         const newQueue = useQueue(interaction.guildId);
         //fix content:
         return interaction.reply({
-            content: `skipped to ${index}\n; now playing:**${queue.tracks.at(index).author} - ${queue.tracks.at(index).title}** from ${queue.tracks.at(index).url} **`,
+            content: message,
             ephemeral: true
         })
     },

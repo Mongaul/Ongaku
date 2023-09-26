@@ -19,7 +19,6 @@ data: new SlashCommandBuilder()
             content: `Not enough tracks in the queue to shuffle`,
             ephemeral: true,
         });
-
         queue.tracks.shuffle();
         return interaction.reply({
         content: `Ongaku has shuffled the queue`,

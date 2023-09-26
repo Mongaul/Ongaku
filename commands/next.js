@@ -22,6 +22,12 @@ module.exports = {
             ephemeral: true
          });
         }
+        if(queue.isEmpty()) {
+            return interaction.reply({
+                content:"There's nothing left in the queue",
+                ephemeral: true
+             });
+        }
         queue.node.skip();
         const newQueue = useQueue(interaction.guildId);
         //fix content:
