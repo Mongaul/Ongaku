@@ -25,6 +25,12 @@ module.exports = {
         queue.node.remove(queue.currentTrack)
         queue.node.skip();
         //fix content:
+        if(queue.getSize()===0){
+            return interaction.reply({
+                content: "Queue has nothing left",
+                ephemeral: true
+            })
+        }
         return interaction.reply({
             content: `removed ${queue.currentTrack.title};\n now playing **${queue.tracks.at(0).author} - ${queue.tracks.at(0).title}**`,
             ephemeral: true

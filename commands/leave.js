@@ -17,7 +17,7 @@ module.exports = {
         
         queue.delete();
         return interaction.reply({
-            content: `Ongaku has disconnected. Fuck you.`
+            content: `🖕🏼| I was disconnected, FUCK YOU; clearing queue!`
         })
     }
 }

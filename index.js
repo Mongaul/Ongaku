@@ -52,6 +52,7 @@ const player = new Player(client);
     console.log("Fuck you");
 })();
 
+//handler for slashcommand event
 client.on(Events.InteractionCreate, async interaction =>{
     if (!interaction.isChatInputCommand()) return;
 
@@ -65,18 +66,34 @@ client.on(Events.InteractionCreate, async interaction =>{
     } catch (error) {
         console.error(error);
         if (interaction.replied || interaction.deferred) {
-            await interaction.followUp({ content: 'Ongaku is terribly coded! An error has occurred while executing this command!', ephemeral: true });
+            await interaction.followUp({ content: 'Ongaku is poorly coded! An error has occurred while executing this command! If nothing broke, then who cares.', ephemeral: true });
         } else {
-            await interaction.reply({ content: 'Ongaku is terribly coded! An error has occurred while executing this command!', ephemeral: true });
+            await interaction.reply({ content: 'Ongaku is poorly coded! An error has occurred while executing this command! If nothing broke, then who cares.', ephemeral: true });
         }
     }
 });
 
+player.events.on("disconnect", (queue) => {
+    queue.metadata.channel.send(
+      "Ongaku has been **manually disconnected** from the voice channel. **Fuck.**"
+    );
+  });
 
+player.events.on('emptyQueue', (queue, track) =>{
+    queue.metadata.channel.send(`🖕| **Queue Finished!**`)
+});
 
+player.events.on("playerStart", (queue, track) => {
+    queue.metadata.channel.send(
+        `Started playing **👌🏼| ${track.author} - ${track.title}**!`
+    );
+});
 
-
-
+player.events.on("playerError", (queue, error, track) => {
+    return queue.metadata.channel.send(
+        `There was an error with **${track.title}**!`
+    );
+});
 
 
 
@@ -161,9 +178,7 @@ player.events.on('disconnect', (queue, track) =>{
 player.events.on('emptyChannel', (queue, track) =>{
     queue.metadata.channel.send(`😪| Nobody here; Ongaku sad; disconnecting!`)
 });
-player.events.on('emptyQueue', (queue, track) =>{
-    queue.metadata.channel.send(`🖕| Queue Finished!`)
-});
+
 
 const {useMainPlayer} = require ('discord-player')
 client.on("interactionCreate", async (interaction) =>{
