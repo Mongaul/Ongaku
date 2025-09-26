@@ -17,7 +17,8 @@ module.exports = {
         
         queue.delete();
         return interaction.reply({
-            content: `🖕🏼| I was disconnected, FUCK YOU; clearing queue!`
+            content: `| I was disconnected; clearing queue!`
         })
     }
+
 }
