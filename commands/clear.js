@@ -1,7 +1,7 @@
 const { useQueue } = require("discord-player");
 const {SlashCommandBuilder} = require ("discord.js");
 
-///Come back to test next and previous
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("clear")
@@ -28,5 +28,6 @@ module.exports = {
             content: `The queue has been **cleared**`
         })
     }
+
 
 }
