@@ -32,13 +32,13 @@ module.exports = {
         }
         if(!queue.tracks.at(song)||queryIndex>queue.getSize()) {
             return interaction.reply({
-               content:"Invalid move: queue isn't big enough or you're moving a nonexistant song. **Fuck you.**",
+               content:"Invalid move: queue isn't big enough or you're moving a nonexistant song. **Check it out.**",
                ephemeral: true
             });
         }
         if(querySong === queryIndex){
             return interaction.reply({
-                content:"Invalid move: can't move song onto itself. **Fuck you.**",
+                content:"Invalid move: can't move song onto itself. **Check it out.**",
                 ephemeral: true
              });
         }
@@ -49,4 +49,5 @@ module.exports = {
             ephemeral: true
         })
     }
+
 }
