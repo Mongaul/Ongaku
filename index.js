@@ -49,7 +49,7 @@ const player = new Player(client);
 (async () => {
     //await player.extractors.loadDefault((ext) => ext !== 'YouTubeExtractor');
     await player.extractors.loadDefault((ext) => ext == 'YouTubeExtractor');
-    console.log("Fuck you");
+    console.log("Check it out");
 })();
 
 //handler for slashcommand event
@@ -75,7 +75,7 @@ client.on(Events.InteractionCreate, async interaction =>{
 
 player.events.on("disconnect", (queue) => {
     queue.metadata.channel.send(
-      "Ongaku has been **manually disconnected** from the voice channel. **Fuck.**"
+      "Ongaku has been **manually disconnected** from the voice channel. **CHECK OUT.**"
     );
   });
 
@@ -201,4 +201,5 @@ client.on("interactionCreate", async (interaction) =>{
         }
     }
 });
+
 */
