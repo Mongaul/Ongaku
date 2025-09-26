@@ -80,7 +80,7 @@ player.events.on("disconnect", (queue) => {
   });
 
 player.events.on('emptyQueue', (queue, track) =>{
-    queue.metadata.channel.send(`🖕| **Queue Finished!**`)
+    queue.metadata.channel.send(`| **Queue Finished!**`)
 });
 
 player.events.on("playerStart", (queue, track) => {
@@ -173,7 +173,7 @@ player.events.on('playerSkip', (queue, track) =>{
     queue.metadata.channel.send(`👍🏼| Skipped **${track.title}**!`)
 })
 player.events.on('disconnect', (queue, track) =>{
-	queue.metadata.channel.send(`🖕🏼| I was disconnected, FUCK YOU; clearing queue!`)
+	queue.metadata.channel.send(`| I was disconnected; clearing queue!`)
 });
 player.events.on('emptyChannel', (queue, track) =>{
     queue.metadata.channel.send(`😪| Nobody here; Ongaku sad; disconnecting!`)
@@ -203,3 +203,4 @@ client.on("interactionCreate", async (interaction) =>{
 });
 
 */
+
